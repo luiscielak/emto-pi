@@ -5,7 +5,7 @@
     body { margin: 0px; padding: 0px; }
     canvas { border: 1px solid #9C9898; }
   </style>
-  <script src="app/bower_components/gumby/js/libs/kinetic-v5.0.1.min.jss"></script>
+  <script src="../js/lib/kinetic-v5.0.1.min.js"></script>
   <script>
 
     var socket = new WebSocket("ws://coder.local:9999/ws");
@@ -47,8 +47,8 @@
         draggable: true
       });
 
-      circle.on("mousedown", function() { 
-      <!--  circle.on("touchstart", function() { -->
+      <!-- circle.on("mousedown", function() {  -->
+        circle.on("touchstart", function() {
           value = value + 20;
           console.log('sending: ' + value);
           sendMessage("{value:" + value + "}");
