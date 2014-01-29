@@ -21,6 +21,12 @@
 
   <script>
 
+    // Disable scrolling on touch devices
+    document.ontouchstart = function(e){
+      e.preventDefault();
+    }
+
+
     // Donut Slider
 
     $(function() {
