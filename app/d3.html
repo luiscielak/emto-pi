@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style>
+    body { margin: 0px; padding: 0px; }
+    canvas { border: 1px solid #9C9898; }
+  </style>
+
+
+  <!-- <script src="https://coder.local/static/common/emto-base/js/libs/kinetic-v5.0.1.min.js"></script> -->
+
+  <script src="https://coder.local/static/common/emto-base/js/libs/kinetic-v5.0.1.min.js"></script>
+
+  <script src="https://coder.local/static/common/emto-base/js/libs/jquery.min.js"></script>
+  <script src="https://coder.local/static/common/emto-base/js/libs/d3.v3.min.js"></script>
+  <script src="https://coder.local/static/common/emto-base/js/libs/dragdealer.min.js"></script>
+
+<!--
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="http://skidding.github.io/dragdealer/lib/dragdealer.min.js"></script>
+-->
+
+  <link rel="stylesheet" href="https://coder.local/static/common/emto-base/css/style.css">
+
+  <script>
+
+    $(function() {
+      var s = new DonutSlider('donut-slider', 30);
+      s.setValue(Math.random() * 0.9 + 0.05);
+    });
+
+////////////////////////
+
+var DonutSlider = function(elementId, borderSize) {
+  var _this = this,
+  size = Math.min($('#' + elementId).width(),
+    $('#' + elementId).height());
+  this.pie = d3.layout.pie().sort(null);
+  this.arc = d3.svg.arc()
+  .innerRadius((size / 2) - borderSize)
+  .outerRadius(size / 2);
+  this.svg = d3.select('#' + elementId).append('svg')
+  .attr('width', size)
+  .attr('height', size)
+  .append('g')
+  .attr('transform', 'translate(' + size / 2 + ',' + size / 2 + ')');
+  this.path = this.svg.selectAll('path')
+  .data(this.pie([0, 100]))
+  .enter().append('path')
+  .attr('fill', function(d, i) {
+   return _this.colors[i];
+ })
+  .attr('d', this.arc);
+  this.dragdealer = new Dragdealer(elementId, {
+    x: 0,
+    slide: false,
+    animationCallback: function(x, y) {
+      _this.updateChart(x * 100);
+      $('#' + elementId).find('.value').text(Math.round(x * 100));
+    }
+  });
+};
+DonutSlider.prototype = {
+  colors: ['#ff6666', '#eee'],
+  setValue: function(value) {
+    this.dragdealer.setValue(value, 0, true);
+  },
+  updateChart: function(value) {
+    this.path.data(this.pie([value, 100 - value]))
+    .attr('d', this.arc);
+  }
+};
+
+</script>
+
+<!--
+  <script>
+
+    var socket = new WebSocket("ws://coder.local:9999/ws");
+
+    socket.onopen = function(){
+      console.log("connected");
+    };
+
+    socket.onmessage = function (message) {
+      console.log("receiving: " + message.data);
+    };
+
+    socket.onclose = function(){
+      console.log("disconnected");
+    };
+
+    sendMessage = function(message) {
+      socket.send(message);
+    };
+
+    var value = 0;
+
+    window.onload = function() {
+      var stage = new Kinetic.Stage({
+        container: "container",
+        width: 610,
+        height: 400
+      });
+
+      var layer  = new Kinetic.Layer();
+
+      var circle = new Kinetic.Circle({
+        x: 100,
+        y: 100,
+        radius: 100,
+        fill: "red",
+        stroke: "black",
+        strokeWidth: 4,
+        draggable: true
+      });
+
+      circle.on("mousedown", function() {
+        value = value + 20;
+        console.log('sending: ' + value);
+        sendMessage("{value:" + value + "}");
+      });
+
+      layer.add(circle);
+      stage.add(layer);
+    };
+
+  </script>
+-->
+
+</head>
+<body>
+
+
+  <div id="container"></div>
+
+
+  <!-- <body> -->
+  <div id="donut-slider">
+    <div class="value"></div>
+    <div class="handle"></div>
+  </div>
+  <!-- </body> -->
+
+
+
+
+</body>
+</html>

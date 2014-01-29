@@ -1,78 +1,77 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <style>
-      body { margin: 0px; padding: 0px; }
-      canvas { border: 1px solid #9C9898; }
-    </style>
-<!--    <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.2.0.js"></script> -->
-<!--    <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.1.min.js"></script> -->
+<head>
+  <style>
+    body { margin: 0px; padding: 0px; }
+    canvas { border: 1px solid #9C9898; }
+  </style>
+  <!--    <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.2.0.js"></script> -->
+  <!--    <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.1.min.js"></script> -->
+  <!--	<script src="/coder/coder-dist/coder-base/static/common/emto-base/js/kinetic-v5.0.1.min.js"> </script> -->
 
-<!--	<script src="/coder/coder-dist/coder-base/static/common/emto-base/js/kinetic-v5.0.1.min.js"> </script> -->
-
-	<script src="https://coder.local/static/common/emto-base/js/kinetic-v5.0.1.min.js"></script>
-
-
-    <script>
- 
-      var socket = new WebSocket("ws://coder.local:9999/ws");
- 
-      socket.onopen = function(){  
-        console.log("connected"); 
-      }; 
- 
-      socket.onmessage = function (message) {
-        console.log("receiving: " + message.data);
-      };
- 
-      socket.onclose = function(){
-        console.log("disconnected"); 
-      };
- 
-      sendMessage = function(message) {
-        socket.send(message);
-      };
- 
-      var value = 0;
- 
-      window.onload = function() {
-        var stage = new Kinetic.Stage({
-          container: "container",
-          width: 610,
-          height: 400
-        });
- 
-        var layer  = new Kinetic.Layer();
- 
-        var circle = new Kinetic.Circle({
-          x: 100,
-          y: 100,
-          radius: 100,
-          fill: "red",
-          stroke: "black",
-          strokeWidth: 4,
-          draggable: true
-        });
- 
-        circle.on("mousedown", function() {
-          value = value + 20;
-          console.log('sending: ' + value);
-          sendMessage("{value:" + value + "}");
-        });
- 
-        layer.add(circle);
-        stage.add(layer);
-      };
- 
-    </script>
-  </head>
-  <body>
-    <div id="container"></div>
+  <script src="https://coder.local/static/common/emto-base/js/libs/kinetic-v5.0.1.min.js"></script>
 
 
-	<h1>heyyyoooo</h1>
+  <script>
+
+    var socket = new WebSocket("ws://coder.local:9999/ws");
+
+    socket.onopen = function(){
+      console.log("connected");
+    };
+
+    socket.onmessage = function (message) {
+      console.log("receiving: " + message.data);
+    };
+
+    socket.onclose = function(){
+      console.log("disconnected");
+    };
+
+    sendMessage = function(message) {
+      socket.send(message);
+    };
+
+    var value = 0;
+
+    window.onload = function() {
+      var stage = new Kinetic.Stage({
+        container: "container",
+        width: 610,
+        height: 400
+      });
+
+      var layer  = new Kinetic.Layer();
+
+      var circle = new Kinetic.Circle({
+        x: 100,
+        y: 100,
+        radius: 100,
+        fill: "red",
+        stroke: "black",
+        strokeWidth: 4,
+        draggable: true
+      });
+
+      circle.on("mousedown", function() {
+        value = value + 20;
+        console.log('sending: ' + value);
+        sendMessage("{value:" + value + "}");
+      });
+
+      layer.add(circle);
+      stage.add(layer);
+    };
+
+  </script>
+</head>
+<body>
+  <div id="container"></div>
+
+
+  <h1>heyyyoooo</h1>
 
 
 
-  </body>
+</body>
 </html>
