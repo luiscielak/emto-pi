@@ -55,14 +55,19 @@
   <script>
 
 
-    window.addEventListener('load', function() {
+    // window.addEventListener('load', function() {
+
+
+    // Disable scrolling in iOS
+
+    document.ontouchmove = function(e){ e.preventDefault(); }
 
 
 
-     var container = document.getElementById("container");
-     var hammertime = new Hammer(container, { drag_max_touches: 0 });
+    var container = document.getElementById("container");
+    var hammertime = new Hammer(container, { drag_max_touches: 0 });
 
-     hammertime.on("touch drag", function(ev) {
+    hammertime.on("touch drag", function(ev) {
 
       var touches = ev.gesture.touches;
 
@@ -87,13 +92,13 @@
       target.style.left = (touches[t].pageX - 50) + "px";
       target.style.top = (touches[t].pageY - 50) + "px";
     }
-  })
+  });
 
-   },false);
+   // },false);
 
 
 
-  </script>
+</script>
 
 </body>
 </html>
