@@ -55,20 +55,24 @@
   <script>
 
 
-   var container = document.getElementById("container");
-   var hammertime = new Hammer(container, { drag_max_touches: 0 });
-
-   hammertime.on("touch drag", function(ev) {
-
-    var touches = ev.gesture.touches;
-
-    ev.gesture.preventDefault();
+    window.addEventListener('load', function() {
 
 
 
+     var container = document.getElementById("container");
+     var hammertime = new Hammer(container, { drag_max_touches: 0 });
+
+     hammertime.on("touch drag", function(ev) {
+
+      var touches = ev.gesture.touches;
+
+      ev.gesture.preventDefault();
 
 
-    for(var t = 0, len = touches.length; t < len; t++) {
+
+
+
+      for(var t = 0, len = touches.length; t < len; t++) {
 
       // console.log(touches[t]);
       console.log(touches[t].clientX);
@@ -83,11 +87,13 @@
       target.style.left = (touches[t].pageX - 50) + "px";
       target.style.top = (touches[t].pageY - 50) + "px";
     }
-  });
+  })
+
+   },false);
 
 
 
- </script>
+  </script>
 
 </body>
 </html>
