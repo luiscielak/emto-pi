@@ -21,6 +21,7 @@
       border-radius: 50px;
       width: 100px;
       height: 100px;
+      cursor: pointer;
     }
 
     .drag1 { background: #42d692; }
@@ -56,16 +57,24 @@
 
    var container = document.getElementById("container");
    var hammertime = new Hammer(container, { drag_max_touches: 0 });
+
    hammertime.on("touch drag", function(ev) {
+
     var touches = ev.gesture.touches;
 
     ev.gesture.preventDefault();
 
-    for(var t = 0, len = touches.length; t < len; t++) {
-      target = touches[t].target;
 
-      console.log(target.style.left);
-      console.log(target);
+
+
+
+    for(var t = 0, len = touches.length; t < len; t++) {
+
+      // console.log(touches[t]);
+      console.log(touches[t].clientX);
+      console.log(touches[t].target);
+
+      target = touches[t].target;
 
 
       if(target.className.indexOf("drag") < 0) {
@@ -76,7 +85,9 @@
     }
   });
 
-</script>
+
+
+ </script>
 
 </body>
 </html>
