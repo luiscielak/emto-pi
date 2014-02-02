@@ -1,19 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <style>
-    body { margin: 0px; padding: 0px; }
-    canvas { border: 1px solid #9C9898; }
-  </style>
-  <!--    <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.2.0.js"></script> -->
-  <!--    <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.1.min.js"></script> -->
-  <!--	<script src="/coder/coder-dist/coder-base/static/common/emto-base/js/kinetic-v5.0.1.min.js"> </script> -->
 
-  <script src="https://coder.local/static/common/emto-base/js/libs/kinetic-v5.0.1.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
+  <!-- // <script src="https://coder.local/static/common/emto-base/js/libs/kinetic-v5.0.1.min.js"></script> -->
+  <!-- // <script src="https://coder.local/static/common/emto-base/js/libs/d3.v3.min.js"></script> -->
+
+  <script src="https://coder.local/static/common/emto-base/js/libs/jquery.min.js"></script>
+  <script src="https://coder.local/static/common/emto-base/js/libs/dragdealer.min.js"></script>
+
+  <link rel="stylesheet" href="https://coder.local/static/common/emto-base/css/style.css">
 
   <script>
 
+
+    // Initialize Web Sockets
     var socket = new WebSocket("ws://coder.local:9999/ws");
 
     socket.onopen = function(){
@@ -32,46 +34,48 @@
       socket.send(message);
     };
 
+
+    // Send value to Arduino
     var value = 0;
 
-    window.onload = function() {
-      var stage = new Kinetic.Stage({
-        container: "container",
-        width: 610,
-        height: 400
-      });
+    function sendValue() {
+      value = value + 20;
+      console.log(value);
+      sendMessage("{value:" + value + "}");
+    }
 
-      var layer  = new Kinetic.Layer();
 
-      var circle = new Kinetic.Circle({
-        x: 100,
-        y: 100,
-        radius: 100,
-        fill: "red",
-        stroke: "black",
-        strokeWidth: 4,
-        draggable: true
-      });
+    new Dragdealer('demo-simple-slider');
 
-      circle.on("mousedown", function() {
-        value = value + 20;
-        console.log('sending: ' + value);
-        sendMessage("{value:" + value + "}");
-      });
 
-      layer.add(circle);
-      stage.add(layer);
-    };
+    new Dragdealer('just-a-slider', {
+      animationCallback: function(x, y) {
+        $('#just-a-slider .value').text(Math.round(x * 100));
+      }
+    });
+
+
 
   </script>
+
+
 </head>
+
 <body>
-  <div id="container"></div>
+
+  <button type="button" onclick="sendValue()">Send Value</button>
 
 
-  <h1><a href="d3.html">d3 example</a></h1>
+
+  <div id="demo-simple-slider" class="dragdealer">
+    <div class="handle red-bar">drag me</div>
+  </div>
+
+
+  <div id="just-a-slider" class="dragdealer">    <div class="handle red-bar">drag me</div></div>
 
 
 
 </body>
+
 </html>
