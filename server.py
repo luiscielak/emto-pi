@@ -17,7 +17,7 @@ clients = []
 
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('app/d3.html')
+        self.render('app/mobile.html')
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def open(self):

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>mobile event logger</title>
+  <!-- <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet"> -->
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+
+</head>
+<body>
+
+
+
+
+
+  <div class="container">
+    <h1>yo!</h1>
+    <br><br><br>
+    <h3>sup?</h3>
+  </div>
+
+
+
+
+
+
+
+
+  <!-- Import libraries -->
+
+  <script src="https://coder.local/static/common/emto-base/js/libs/jquery.min.js"></script>
+  <script src="https://coder.local/static/common/emto-base/js/libs/hammer.min.js"></script>
+  <!-- // <script src="https://coder.local/static/common/emto-base/js/plugins/hammer.fakemultitouch.js"></script> -->
+  <!-- // <script src="https://coder.local/static/common/emto-base/js/plugins/hammer.showtouches.js"></script> -->
+
+
+
+  <script>
+
+    var lastY;
+    $(document).bind('touchmove', function (e){
+      var currentY = e.touches[0].clientY;
+      if (currentY !== lastY){
+        // moved vertically
+        return;
+      }
+      lastY = currentY;
+      //insert code if you want to execute something when an horizontal touchmove is made
+    });
+
+
+  </script>
+
+</body>
+</html>
