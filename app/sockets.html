@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- // <script src="https://coder.local/static/common/emto-base/js/libs/kinetic-v5.0.1.min.js"></script> -->
+  <!-- // <script src="https://coder.local/static/common/emto-base/js/libs/d3.v3.min.js"></script> -->
+
+  <script src="https://coder.local/static/common/emto-base/js/libs/jquery.min.js"></script>
+  <script src="https://coder.local/static/common/emto-base/js/libs/dragdealer.min.js"></script>
+
+  <link rel="stylesheet" href="https://coder.local/static/common/emto-base/css/style.css">
+
+  <script>
+
+
+    // Initialize Web Sockets
+    var socket = new WebSocket("ws://coder.local:9999/ws");
+
+    socket.onopen = function(){
+      console.log("connected");
+    };
+
+    socket.onmessage = function (message) {
+      console.log("receiving: " + message.data);
+    };
+
+    socket.onclose = function(){
+      console.log("disconnected");
+    };
+
+    sendMessage = function(message) {
+      socket.send(message);
+    };
+
+
+    // Send value to Arduino
+    var value = 0;
+
+    function sendValue() {
+      value = value + 20;
+      console.log(value);
+      sendMessage("{value:" + value + "}");
+    }
+
+
+    new Dragdealer('demo-simple-slider');
+
+
+    new Dragdealer('just-a-slider', {
+      animationCallback: function(x, y) {
+        $('#just-a-slider .value').text(Math.round(x * 100));
+      }
+    });
+
+
+
+  </script>
+
+
+</head>
+
+<body>
+
+  <button type="button" onclick="sendValue()">Send Value</button>
+
+
+
+  <div id="demo-simple-slider" class="dragdealer">
+    <div class="handle red-bar">drag me</div>
+  </div>
+
+
+  <div id="just-a-slider" class="dragdealer">    <div class="handle red-bar">drag me</div></div>
+
+
+
+</body>
+
+</html>

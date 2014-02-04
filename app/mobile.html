@@ -67,13 +67,46 @@
 
   <script>
 
+  // #
+  // # Web Sockets
+  // #
+
+    // Initialize Web Sockets
+    var socket = new WebSocket("ws://coder.local:9999/ws");
+
+    socket.onopen = function(){
+      console.log("connected");
+    };
+
+    socket.onmessage = function (message) {
+      console.log("receiving: " + message.data);
+    };
+
+    socket.onclose = function(){
+      console.log("disconnected");
+    };
+
+    sendMessage = function(message) {
+      socket.send(message);
+    };
 
 
+    // Send value to Arduino
+    var value = 0;
 
+    function sendValue() {
+      value = value + 20;
+      console.log(value);
+      sendMessage("{value:" + value + "}");
+    }
+
+
+  // #
+  // # UI
+  // #
 
     // Disable scrolling in iOS
     document.ontouchmove = function(e){ e.preventDefault(); }
-
 
 
     var container = document.getElementById("container");
@@ -81,37 +114,19 @@
 
     // hammertime.on("touch drag", function(ev) {
       hammertime.on("touch", function(ev) {
-
         var touches = ev.gesture.touches;
-
         ev.gesture.preventDefault();
-
 
         console.log(touches[0].type);
 
-    //   for(var t = 0, len = touches.length; t < len; t++) {
+        sendValue();
 
-    //   // console.log(touches[t]);
-    //   console.log(touches[t].clientX);
-    //   console.log(touches[t].target);
-
-
-    //   target = touches[t].target;
-
-
-    //   if(target.className.indexOf("drag") < 0) {
-    //     return;
-    //   }
-    //   target.style.left = (touches[t].pageX - 50) + "px";
-    //   target.style.top = (touches[t].pageY - 50) + "px";
-    // }
-  });
-
-   // },false);
+      });
 
 
 
-</script>
 
-</body>
-</html>
+    </script>
+
+  </body>
+  </html>
