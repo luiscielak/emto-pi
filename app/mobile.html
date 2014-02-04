@@ -144,7 +144,7 @@
 window.ontouchmove = function(evt){
   printLog(evt);
 
-  console.log(evt);
+  // console.log(evt);
 }
 
 
@@ -154,6 +154,7 @@ window.onclick = function(evt){     // onclick; onmousemove; ontouchmove
 
 window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
   printLog(evt);
+  console.log(evt);
 }
 
 function printLog(evt){
@@ -166,7 +167,7 @@ function printLog(evt){
   console.log("x: "+evt.x);    // 139
   console.log("y: "+evt.y);    // 146
 
-  sendMessage(evt.x);
+  sendMessage(evt.pageX);
 
 }
 
