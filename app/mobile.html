@@ -107,7 +107,7 @@
   // #
 
     // Disable scrolling in iOS
-    // document.ontouchmove = function(e){ e.preventDefault(); }
+    document.ontouchmove = function(e){ e.preventDefault(); }
 /*
     var container = document.getElementById("container");
     var hammertime = new Hammer(container, { drag_max_touches: 0 });
