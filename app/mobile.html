@@ -142,9 +142,16 @@
 
 
 window.ontouchmove = function(evt){
-  printLog(evt);
-
+  // printLog(evt);
   // console.log(evt);
+  sendMessage(evt.pageX);
+}
+
+
+window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
+  // printLog(evt);
+  // console.log(evt);
+  sendMessage(evt.pageX);
 }
 
 
@@ -152,10 +159,11 @@ window.onclick = function(evt){     // onclick; onmousemove; ontouchmove
   printLog(evt);
 }
 
-window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
+window.ontouched = function(evt){     // onclick; onmousemove; ontouchmove
   printLog(evt);
-  console.log(evt);
 }
+
+
 
 function printLog(evt){
   console.log(evt.srcElement);     // div.square.drag2
