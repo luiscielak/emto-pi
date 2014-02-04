@@ -94,10 +94,11 @@
     // Send value to Arduino
     var value = 0;
 
-    function sendValue() {
+    function sendValue(str) {
       value = value + 20;
       console.log(value);
-      sendMessage("{value:" + value + "}");
+      // sendMessage("{value:" + value + "}");
+      sendMessage(str);
     }
 
 
@@ -117,16 +118,20 @@
         var touches = ev.gesture.touches;
         ev.gesture.preventDefault();
 
-        console.log(touches[0].type);
+        // console.log(touches[0].type);
 
-        sendValue();
+        sendValue(touches[0].type);
 
       });
 
 
+      document.ontouchstart = function(evt){
+        console.log(evt.pageX + "/" + evt.pageY);
+      // OH NO! These values are blank, this must be a bug
+      }
 
 
-    </script>
+</script>
 
-  </body>
-  </html>
+</body>
+</html>
