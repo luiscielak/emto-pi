@@ -25,6 +25,17 @@
       cursor: pointer;
     }
 
+    .square {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      background: #9fe1e7;
+      /*border-radius: 50px;*/
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
     .drag1 { background: #42d692; }
     .drag2 { background: #4986e7; }
     .drag3 { background: #d06b64; }
@@ -37,14 +48,15 @@
 <body>
 
 
-  <h1>Drag the balls!</h1>
+  <!-- <h1>Drag the balls!</h1> -->
 
   <div id="container">
-    <div class="drag drag1"></div>
+    <!-- <div class="drag drag1"></div> -->
     <!-- <div class="drag drag2"></div> -->
     <!-- <div class="drag drag3"></div> -->
     <!-- <div class="drag drag4"></div> -->
     <!-- <div class="drag drag5"></div> -->
+    <div class="square drag2"></div>
   </div>
 
 
@@ -56,11 +68,10 @@
   <script>
 
 
-    // window.addEventListener('load', function() {
+
 
 
     // Disable scrolling in iOS
-
     document.ontouchmove = function(e){ e.preventDefault(); }
 
 
@@ -68,31 +79,32 @@
     var container = document.getElementById("container");
     var hammertime = new Hammer(container, { drag_max_touches: 0 });
 
-    hammertime.on("touch drag", function(ev) {
+    // hammertime.on("touch drag", function(ev) {
+      hammertime.on("touch", function(ev) {
 
-      var touches = ev.gesture.touches;
+        var touches = ev.gesture.touches;
 
-      ev.gesture.preventDefault();
-
-
-
+        ev.gesture.preventDefault();
 
 
-      for(var t = 0, len = touches.length; t < len; t++) {
+        console.log(touches[0].type);
 
-      // console.log(touches[t]);
-      console.log(touches[t].clientX);
-      console.log(touches[t].target);
+    //   for(var t = 0, len = touches.length; t < len; t++) {
 
-      target = touches[t].target;
+    //   // console.log(touches[t]);
+    //   console.log(touches[t].clientX);
+    //   console.log(touches[t].target);
 
 
-      if(target.className.indexOf("drag") < 0) {
-        return;
-      }
-      target.style.left = (touches[t].pageX - 50) + "px";
-      target.style.top = (touches[t].pageY - 50) + "px";
-    }
+    //   target = touches[t].target;
+
+
+    //   if(target.className.indexOf("drag") < 0) {
+    //     return;
+    //   }
+    //   target.style.left = (touches[t].pageX - 50) + "px";
+    //   target.style.top = (touches[t].pageY - 50) + "px";
+    // }
   });
 
    // },false);
