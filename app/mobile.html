@@ -31,16 +31,31 @@
       top: 0px;
       background: #9fe1e7;
       /*border-radius: 50px;*/
-      width: 100%;
+      /*      width: 100%;*/
       height: 100%;
       cursor: pointer;
     }
 
-    .drag1 { background: #42d692; }
-    .drag2 { background: #4986e7; }
-    .drag3 { background: #d06b64; }
-    .drag4 { background: #cd74e6; }
-    .drag5 { background: #9fe1e7; }
+
+    .drag1 {
+      background: #4986e7;
+      width: 50%;
+    }
+    .drag2 {
+      background: #42d692;
+      width: 50%;
+      left: 50%;
+    }
+
+    .drag3 {
+      background: #d06b64;
+    }
+    .drag4 {
+      background: #cd74e6;
+    }
+    .drag5 {
+      background: #9fe1e7;
+    }
 
   </style>
 </head>
@@ -55,8 +70,9 @@
     <!-- <div class="drag drag2"></div> -->
     <!-- <div class="drag drag3"></div> -->
     <!-- <div class="drag drag4"></div> -->
-    <!-- <div class="drag drag5"></div> -->
+    <div class="square drag1"></div>
     <div class="square drag2"></div>
+
   </div>
 
 
@@ -108,35 +124,49 @@
 
     // Disable scrolling in iOS
     document.ontouchmove = function(e){ e.preventDefault(); }
-/*
-    var container = document.getElementById("container");
-    var hammertime = new Hammer(container, { drag_max_touches: 0 });
+    /*
+        var container = document.getElementById("container");
+        var hammertime = new Hammer(container, { drag_max_touches: 0 });
 
-    // hammertime.on("touch drag", function(ev) {
-      hammertime.on("touch", function(ev) {
-        var touches = ev.gesture.touches;
-        ev.gesture.preventDefault();
+        // hammertime.on("touch drag", function(ev) {
+          hammertime.on("touch", function(ev) {
+            var touches = ev.gesture.touches;
+            ev.gesture.preventDefault();
 
-        // console.log(touches[0].type);
+            // console.log(touches[0].type);
 
-        sendValue(touches[0].type);
+            sendValue(touches[0].type);
 
-      });
+          });
 */
 
-      window.ontouchmove = function(evt){
-        console.log(evt.pageX + "/" + evt.pageY);
-      // OH NO! These values are blank, this must be a bug
-      sendMessage("touch");
-      }
+
+window.ontouchmove = function(evt){
+  printLog(evt);
+}
 
 
-      window.onclick = function(evt){
-        console.log(evt.pageX + "/" + evt.pageY);
-      // OH NO! These values are blank, this must be a bug
-      sendMessage("click");
+window.onclick = function(evt){     // onclick; onmousemove; ontouchmove
+  printLog(evt);
+}
 
-      }
+window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
+  printLog(evt);
+}
+
+function printLog(evt){
+  console.log(evt.srcElement);     // div.square.drag2
+  console.log(evt.toElement);    // div.square.drag2
+  console.log("target: "+evt.target);     // div.square.drag2
+  console.log("timeStamp: "+evt.timeStamp);    // 1391507800817
+  console.log("type: "+evt.type);     // "click"
+  console.log("which: "+evt.which);    // 1
+  console.log("x: "+evt.x);    // 139
+  console.log("y: "+evt.y);    // 146
+
+  sendMessage(evt.x);
+
+}
 
 
 
