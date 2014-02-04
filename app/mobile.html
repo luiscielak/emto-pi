@@ -3,8 +3,8 @@
 <head>
   <title>mobile event logger</title>
   <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"> -->
+  <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
 
 
   <style>
@@ -108,7 +108,7 @@
 
     // Disable scrolling in iOS
     // document.ontouchmove = function(e){ e.preventDefault(); }
-
+/*
     var container = document.getElementById("container");
     var hammertime = new Hammer(container, { drag_max_touches: 0 });
 
@@ -122,12 +122,22 @@
         sendValue(touches[0].type);
 
       });
-
+*/
 
       window.ontouchmove = function(evt){
         console.log(evt.pageX + "/" + evt.pageY);
       // OH NO! These values are blank, this must be a bug
+      sendMessage("touch");
       }
+
+
+      window.onclick = function(evt){
+        console.log(evt.pageX + "/" + evt.pageY);
+      // OH NO! These values are blank, this must be a bug
+      sendMessage("click");
+
+      }
+
 
 
 </script>
