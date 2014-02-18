@@ -71,6 +71,9 @@
       background: #9fe1e7;
     }
 
+    .active {
+      background: black;
+    }
 
   </style>
 </head>
@@ -196,6 +199,8 @@ window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
     console.log("o-")
     console.log("  ")
     console.log("  ")
+
+    $('.drag3').addClass('active');
   }
 
   if(mouseX < width/2 && mouseY < height/2) {
@@ -204,6 +209,7 @@ window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
     console.log("--")
     console.log("  ")
     console.log("  ")
+    $('.drag1').addClass('active');
   }
 
 
@@ -213,6 +219,7 @@ window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
     console.log("-o")
     console.log("  ")
     console.log("  ")
+    $('.drag4').addClass('active');
   }
 
 
@@ -222,6 +229,7 @@ window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
     console.log("--")
     console.log("  ")
     console.log("  ")
+    $('.drag2').addClass('active');
   }
 
 
