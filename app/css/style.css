@@ -5,7 +5,36 @@
 */
 
 body { margin: 0px; padding: 0px; }
-canvas { border: 1px solid #9C9898; }
+/*canvas { border: 1px solid #9C9898; }*/
+
+body {
+  background-color: #9C9898;
+}
+
+/*
+//////////////
+// SECTIONS //
+//////////////
+*/
+
+
+#main {
+  background-color: #bbb;
+  position: absolute;
+  top: 0px;
+  height: 75%;
+  width: 100%;
+}
+
+
+#sub {
+  background-color: #ddd;
+  position: absolute;
+  bottom: 0px;
+  height: 25%;
+  width: 100%;
+}
+
 
 
 /*
@@ -13,7 +42,6 @@ canvas { border: 1px solid #9C9898; }
 // MODULES //
 /////////////
 */
-
 
 
 #donut-slider {
