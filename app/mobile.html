@@ -151,13 +151,14 @@ window.ontouchmove = function(evt){
 
 window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
   // printLog(evt);
-  // console.log(evt);
-  sendMessage(evt.pageX);
+   console.log(evt);
+//  sendMessage(evt.pageX);
 }
 
 
 window.onclick = function(evt){     // onclick; onmousemove; ontouchmove
   printLog(evt);
+sendMessage(evt.pageX);
 }
 
 window.ontouched = function(evt){     // onclick; onmousemove; ontouchmove
