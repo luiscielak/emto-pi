@@ -160,9 +160,7 @@ var mouseY;
 
 window.onclick = function(evt){     // onclick; onmousemove; ontouchmove
   drawLog(evt);
-
   sendColor(evt);
-
 }
 
 
@@ -187,7 +185,8 @@ window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
 
 
 window.ontouched = function(evt){     // onclick; onmousemove; ontouchmove
-  // printLog(evt);
+ drawLog(evt);
+ sendColor(evt);
 }
 
 
