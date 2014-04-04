@@ -10,6 +10,10 @@
 
   <style>
 
+    body {
+      cursor: url(img/cursor_01.png), auto;
+    }
+
     h1 {
       margin: 30px;
       text-align: center;
@@ -41,22 +45,54 @@
     .drag1 {
       background: #4986e7;
       width: 50%;
+      height: 50%;
     }
+
     .drag2 {
       background: #42d692;
       width: 50%;
+      height: 50%;
       left: 50%;
     }
 
     .drag3 {
       background: #d06b64;
+      width: 50%;
+      height: 50%;
+      top: 50%;
     }
     .drag4 {
       background: #cd74e6;
+      width: 50%;
+      height: 50%;
+      top: 50%;
+      left: 50%;
     }
     .drag5 {
       background: #9fe1e7;
     }
+
+    .active {
+      /*background: rgba(0,0,0,.4);*/
+    }
+
+
+    .drag1:hover {
+      background-color: rgba(40,40,40,.5);
+    }
+
+    .drag2:hover {
+      background-color: rgba(60,60,60,.5);
+    }
+
+    .drag3:hover {
+      background-color: rgba(80,80,80,.5);
+    }
+
+    .drag4:hover {
+      background-color: rgba(100,100,100,.5);
+    }
+
 
   </style>
 </head>
@@ -73,84 +109,104 @@
     <!-- <div class="drag drag4"></div> -->
     <div class="square drag1"></div>
     <div class="square drag2"></div>
+    <div class="square drag3"></div>
+    <div class="square drag4"></div>
 
   </div>
 
 
   <!-- Import libraries -->
-  <script src="https://coder.local/static/common/emto-base/js/libs/jquery.min.js"></script>
-  <script src="https://coder.local/static/common/emto-base/js/libs/hammer.min.js"></script>
-
+  <!-- // <script src="https://coder.local/static/common/emto-base/js/libs/jquery.min.js"></script> -->
+  <!-- // <script src="https://coder.local/static/common/emto-base/js/libs/hammer.min.js"></script> -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
   <script>
 
-  // #
-  // # Web Sockets
-  // #
+// #
+// # Web Sockets
+// #
 
-    // Initialize Web Sockets
-    var socket = new WebSocket("ws://coder.local:9999/ws");
+// Initialize Web Sockets
+var socket = new WebSocket("ws://coder.local:9999/ws");
 
-    socket.onopen = function(){
-      console.log("connected");
-    };
+socket.onopen = function(){
+  console.log("connected");
+};
 
-    socket.onmessage = function (message) {
-      console.log("receiving: " + message.data);
-    };
+socket.onmessage = function (message) {
+  console.log("receiving: " + message.data);
+};
 
-    socket.onclose = function(){
-      console.log("disconnected");
-    };
+socket.onclose = function(){
+  console.log("disconnected");
+};
 
-    sendMessage = function(message) {
-      socket.send(message);
-    };
-
-
-    // Send value to Arduino
-    var value = 0;
-
-    function sendValue(str) {
-      value = value + 20;
-      console.log(value);
-      // sendMessage("{value:" + value + "}");
-      sendMessage(str);
-    }
+sendMessage = function(message) {
+  socket.send(message);
+};
 
 
-  // #
-  // # UI
-  // #
+// Send value to Arduino
+var value = 0;
 
-    // Disable scrolling in iOS
-    document.ontouchmove = function(e){ e.preventDefault(); }
-    /*
-        var container = document.getElementById("container");
-        var hammertime = new Hammer(container, { drag_max_touches: 0 });
+function sendValue(str) {
+  value = value + 20;
+  console.log(value);
+// sendMessage("{value:" + value + "}");
+sendMessage(str);
+}
 
-        // hammertime.on("touch drag", function(ev) {
-          hammertime.on("touch", function(ev) {
-            var touches = ev.gesture.touches;
-            ev.gesture.preventDefault();
 
-            // console.log(touches[0].type);
 
-            sendValue(touches[0].type);
 
-          });
-*/
+// #
+// # UI
+// #
 
+
+
+
+
+
+
+
+var width = $(document).width();
+var height = $(document).height();
+
+var mouseX;
+var mouseY;
+// # Logging
+
+
+window.onclick = function(evt){     // onclick; onmousemove; ontouchmove
+
+
+  mouseX = evt.x;
+  mouseY = evt.y;
+
+  // if(width<800){
+    // console.log("small"+width);
+  // }
+
+  // console.log(mouseX);
+
+}
+
+
+
+// Disable scrolling in iOS
+document.ontouchmove = function(e){ e.preventDefault(); }
 
 window.ontouchmove = function(evt){
-  // printLog(evt);
-  // console.log(evt);
-  sendMessage(evt.pageX);
+// printLog(evt);
+// console.log(evt);
+// sendMessage(evt.pageX);
 }
 
 
 window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
   // printLog(evt);
+
    console.log(evt);
 //  sendMessage(evt.pageX);
 }
@@ -159,25 +215,82 @@ window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
 window.onclick = function(evt){     // onclick; onmousemove; ontouchmove
   printLog(evt);
 sendMessage(evt.pageX);
+
+  // console.log(evt);
+  // sendMessage(evt.pageX);
+
+  mouseX = evt.x;
+  mouseY = evt.y;
+
+  if(mouseX < width/2 && mouseY > height/2) {
+    console.log("  ")
+    console.log("--")
+    console.log("o-")
+    console.log("  ")
+    console.log("  ")
+
+    $('.drag3').addClass('active');
+  }
+
+  if(mouseX < width/2 && mouseY < height/2) {
+    console.log("  ")
+    console.log("o-")
+    console.log("--")
+    console.log("  ")
+    console.log("  ")
+    $('.drag1').addClass('active');
+  }
+
+
+  if(mouseX > width/2 && mouseY > height/2) {
+    console.log("  ")
+    console.log("--")
+    console.log("-o")
+    console.log("  ")
+    console.log("  ")
+    $('.drag4').addClass('active');
+  }
+
+
+  if(mouseX > width/2 && mouseY < height/2) {
+    console.log("  ")
+    console.log("-o")
+    console.log("--")
+    console.log("  ")
+    console.log("  ")
+    $('.drag2').addClass('active');
+  }
+
+
 }
+
+
 
 window.ontouched = function(evt){     // onclick; onmousemove; ontouchmove
-  printLog(evt);
+  // printLog(evt);
 }
 
+
+function printMsg(evt){
+
+
+
+  console.log($(window).width);
+
+}
 
 
 function printLog(evt){
-  console.log(evt.srcElement);     // div.square.drag2
-  console.log(evt.toElement);    // div.square.drag2
-  console.log("target: "+evt.target);     // div.square.drag2
-  console.log("timeStamp: "+evt.timeStamp);    // 1391507800817
-  console.log("type: "+evt.type);     // "click"
-  console.log("which: "+evt.which);    // 1
-  console.log("x: "+evt.x);    // 139
-  console.log("y: "+evt.y);    // 146
+console.log(evt.srcElement);     // div.square.drag2
+console.log(evt.toElement);    // div.square.drag2
+console.log("target: "+evt.target);     // div.square.drag2
+console.log("timeStamp: "+evt.timeStamp);    // 1391507800817
+console.log("type: "+evt.type);     // "click"
+console.log("which: "+evt.which);    // 1
+console.log("x: "+evt.x);    // 139
+console.log("y: "+evt.y);    // 146
 
-  sendMessage(evt.pageX);
+sendMessage(evt.pageX);
 
 }
 
