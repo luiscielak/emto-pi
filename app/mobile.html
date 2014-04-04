@@ -142,10 +142,30 @@ socket.onclose = function(){
 };
 
 sendMessage = function(message) {
-  console.log("sending: " + message);
   socket.send(message);
-
 };
+
+
+// Send value to Arduino
+var value = 0;
+
+function sendValue(str) {
+  value = value + 20;
+  console.log(value);
+// sendMessage("{value:" + value + "}");
+sendMessage(str);
+}
+
+
+
+
+// #
+// # UI
+// #
+
+
+
+
 
 
 
@@ -155,17 +175,23 @@ var height = $(document).height();
 
 var mouseX;
 var mouseY;
-
-
-
+// # Logging
 
 
 window.onclick = function(evt){     // onclick; onmousemove; ontouchmove
-  drawLog(evt);
 
-  sendColor(evt);
+
+  mouseX = evt.x;
+  mouseY = evt.y;
+
+  // if(width<800){
+    // console.log("small"+width);
+  // }
+
+  // console.log(mouseX);
 
 }
+
 
 
 // Disable scrolling in iOS
@@ -183,6 +209,48 @@ window.onmousemove = function(evt){     // onclick; onmousemove; ontouchmove
   // console.log(evt);
   // sendMessage(evt.pageX);
 
+  mouseX = evt.x;
+  mouseY = evt.y;
+
+  if(mouseX < width/2 && mouseY > height/2) {
+    console.log("  ")
+    console.log("--")
+    console.log("o-")
+    console.log("  ")
+    console.log("  ")
+
+    $('.drag3').addClass('active');
+  }
+
+  if(mouseX < width/2 && mouseY < height/2) {
+    console.log("  ")
+    console.log("o-")
+    console.log("--")
+    console.log("  ")
+    console.log("  ")
+    $('.drag1').addClass('active');
+  }
+
+
+  if(mouseX > width/2 && mouseY > height/2) {
+    console.log("  ")
+    console.log("--")
+    console.log("-o")
+    console.log("  ")
+    console.log("  ")
+    $('.drag4').addClass('active');
+  }
+
+
+  if(mouseX > width/2 && mouseY < height/2) {
+    console.log("  ")
+    console.log("-o")
+    console.log("--")
+    console.log("  ")
+    console.log("  ")
+    $('.drag2').addClass('active');
+  }
+
 
 }
 
@@ -193,85 +261,14 @@ window.ontouched = function(evt){     // onclick; onmousemove; ontouchmove
 }
 
 
+function printMsg(evt){
 
 
 
-
-function sendColor(evt){
-
- mouseX = evt.x;
- mouseY = evt.y;
-
- if(mouseX < width/2 && mouseY > height/2) {
- // Red
- sendMessage(3);
-}
-
-if(mouseX < width/2 && mouseY < height/2) {
-  // Blue
-  sendMessage(1);
-}
-
-if(mouseX > width/2 && mouseY > height/2) {
-  // Purple
-  sendMessage(4);
-}
-
-
-if(mouseX > width/2 && mouseY < height/2) {
-  // Green
-  sendMessage(2);
-}
-
+  console.log($(window).width);
 
 }
 
-
-
-function drawLog(evt){
-  mouseX = evt.x;
-  mouseY = evt.y;
-
-  if(mouseX < width/2 && mouseY > height/2) {
-    console.log("  ")
-    console.log("--")
-    console.log("o-")
-    console.log("  ")
-
-
-    $('.drag3').addClass('active');
-  }
-
-  if(mouseX < width/2 && mouseY < height/2) {
-    console.log("  ")
-    console.log("o-")
-    console.log("--")
-    console.log("  ")
-
-    $('.drag1').addClass('active');
-  }
-
-
-  if(mouseX > width/2 && mouseY > height/2) {
-    console.log("  ")
-    console.log("--")
-    console.log("-o")
-    console.log("  ")
-
-    $('.drag4').addClass('active');
-  }
-
-
-  if(mouseX > width/2 && mouseY < height/2) {
-    console.log("  ")
-    console.log("-o")
-    console.log("--")
-    console.log("  ")
-
-    $('.drag2').addClass('active');
-  }
-
-}
 
 function printLog(evt){
 console.log(evt.srcElement);     // div.square.drag2
