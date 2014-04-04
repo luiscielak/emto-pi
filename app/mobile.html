@@ -100,13 +100,7 @@
 <body>
 
 
-  <!-- <h1>Drag the balls!</h1> -->
-
   <div id="container">
-    <!-- <div class="drag drag1"></div> -->
-    <!-- <div class="drag drag2"></div> -->
-    <!-- <div class="drag drag3"></div> -->
-    <!-- <div class="drag drag4"></div> -->
     <div class="square drag1"></div>
     <div class="square drag2"></div>
     <div class="square drag3"></div>
@@ -116,7 +110,7 @@
 
 
   <!-- Import libraries -->
- <script src="http://coder.local/static/common/emto-base/js/libs/jquery.min.js"></script>
+  <!-- // <script src="https://coder.local/static/common/emto-base/js/libs/jquery.min.js"></script> -->
   <!-- // <script src="https://coder.local/static/common/emto-base/js/libs/hammer.min.js"></script> -->
   <!-- // <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
 
@@ -150,8 +144,12 @@ sendMessage = function(message) {
 
 
 
-var width = $(document).width();
-var height = $(document).height();
+// var width = $(document).width();
+// var height = $(document).height();
+
+var width = document.documentElement.clientWidth;
+var height = document.documentElement.clientHeight;
+
 
 var mouseX;
 var mouseY;
@@ -239,7 +237,7 @@ function drawLog(evt){
     console.log("  ")
 
 
-    $('.drag3').addClass('active');
+    // $('.drag3').addClass('active');
   }
 
   if(mouseX < width/2 && mouseY < height/2) {
@@ -248,7 +246,7 @@ function drawLog(evt){
     console.log("--")
     console.log("  ")
 
-    $('.drag1').addClass('active');
+    // $('.drag1').addClass('active');
   }
 
 
@@ -258,7 +256,7 @@ function drawLog(evt){
     console.log("-o")
     console.log("  ")
 
-    $('.drag4').addClass('active');
+    // $('.drag4').addClass('active');
   }
 
 
@@ -268,7 +266,7 @@ function drawLog(evt){
     console.log("--")
     console.log("  ")
 
-    $('.drag2').addClass('active');
+    // $('.drag2').addClass('active');
   }
 
 }
