@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <script type="text/javascript" src="js/libs/processing.min.js"></script>
+
+  <title>touch event logger</title>
+
+  <script type="text/javascript">
+
+    var processingInstance;
+
+    function updateColor(newValue){
+      console.log("SLIDER: " + newValue);
+      processingInstance = Processing.getInstanceById('sketch');
+      processingInstance.changeBGColor(newValue);
+    }
+
+  </script>
+
+</head>
+<body>
+
+  <script type="text/processing">
+
+    int tWidth = 500;
+    int tHeight = 500;
+
+    color currentColor;
+    color bgColor = 0;
+
+    void setup() {
+      size(tWidth, tHeight);
+      colorMode(RGB);
+      background(0);
+      noCursor();
+
+      currentColor = 2;
+      bgColor = 30;
+
+      stroke(240);
+      noFill();
+    }
+
+    void draw() {
+      fill(bgColor,bgColor,bgColor,100);
+      rect(0, 0, tWidth,tHeight);
+
+      drawMouse();
+      if(mousePressed)drawMouse();
+    }
+
+    void drawMouse() {
+
+      noFill();
+      stroke(currentColor);
+      ellipse(mouseX, mouseY, 30, 30);
+      ellipse(mouseX, mouseY, 10, 10);
+
+      if (mousePressed) {
+
+        if (mouseX>width/2 && mouseY>height/2) background(235, 128, 32);
+        if (mouseX<width/2 && mouseY>height/2) background(235, 32, 128);
+        if (mouseX<width/2 && mouseY<height/2) background(32, 235, 128);
+        if (mouseX>width/2 && mouseY<height/2) background(32, 128, 235);
+
+        currentColor = 200;
+
+        stroke(240);
+        noFill();
+        ellipse(mouseX, mouseY, 30, 30);
+        ellipse(mouseX, mouseY, 10, 10);
+      }
+      else {
+        currentColor = 2;
+      }
+    }
+
+
+    void changeBGColor(int tValue){
+      bgColor = tValue;
+      console.log(bgColor);
+    }
+
+  </script>
+
+  <canvas id="sketch" style="border: 1px solid black;"></canvas>
+
+  <div id="interface" >
+    <input type="range" class="colorslider" min="0" max="255" value="30" step="1" onChange="updateColor(this.value)"/>
+  </div>
+
+</body>
+</html>
