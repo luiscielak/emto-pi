@@ -77,7 +77,7 @@
         background(r,g,100);
 
         // sendColor(r,g,100);
-        // sendColor(2);
+        // sendColor(r);
 
         // Custom mouse cursor - light
         noFill();
@@ -92,9 +92,12 @@
 
     void mousePressed() {
 
+      r = map(mouseY,0,screenHeight,0,255);
+      sendColor(r);
+
       // drawLog(mouseX,mouseY);
 
-      sendColor(random(1,4));
+      // sendColor(random(1,4));
     }
 
 

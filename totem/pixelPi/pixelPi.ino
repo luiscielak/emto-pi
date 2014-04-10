@@ -70,27 +70,29 @@ void setColor(char* c) {
 
   int val = atoi(c);
 
+  colorWipe(strip.Color(val,0,0), 10);
+  colorWipe(strip.Color(0, 0, 0), 1); // Black
 
-  switch (val) {
-  case 1:
-    colorWipe(strip.Color(0,0,255), 10); // Blue
-    colorWipe(strip.Color(0, 0, 0), 1); // Black
-    break;
-  case 2:
-    colorWipe(strip.Color(0,255,0), 10); // Green
-    colorWipe(strip.Color(0, 0, 0), 1); // Black
-    break;
-  case 3:
-    colorWipe(strip.Color(255,0,0), 10); // Red
-    colorWipe(strip.Color(0, 0, 0), 1); // Black
-    break;
-  case 4:
-    colorWipe(strip.Color(223, 0, 255), 10); // Purple
-    colorWipe(strip.Color(0, 0, 0), 1); // Black
-    break;    
+//  switch (val) {
+//  case 1:
+//    colorWipe(strip.Color(0,0,255), 10); // Blue
+//    colorWipe(strip.Color(0, 0, 0), 1); // Black
+//    break;
+//  case 2:
+//    colorWipe(strip.Color(0,255,0), 10); // Green
+//    colorWipe(strip.Color(0, 0, 0), 1); // Black
+//    break;
+//  case 3:
+//    colorWipe(strip.Color(255,0,0), 10); // Red
+//    colorWipe(strip.Color(0, 0, 0), 1); // Black
+//    break;
+//  case 4:
+//    colorWipe(strip.Color(223, 0, 255), 10); // Purple
+//    colorWipe(strip.Color(0, 0, 0), 1); // Black
+//    break;    
 //  default: 
 //    setColor();
-  }
+//  }
 
 
 
