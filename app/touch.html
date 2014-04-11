@@ -90,7 +90,7 @@
 
       background(r,g,b);
 
-      r = (int)map(mouseX,0,width,0,255);
+      r = (int)map(mouseX,1,width,1,255);
       g = 30;
       b = 100;
       // console.log(r+" "+g+" "+b);
@@ -119,6 +119,7 @@
     }
 
     void mouseReleased() {
+      sendMessage(0);
       background(40);
 
       // Custom mouse cursor - dark
@@ -126,8 +127,6 @@
       stroke(0);
       ellipse(mouseX, mouseY, 30, 30);
       ellipse(mouseX, mouseY, 10, 10);
-
-      sendMessage(-1);
     }
 
   </script>

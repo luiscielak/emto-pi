@@ -75,7 +75,7 @@ void setColor(char* c) {
 //    strip.Color(val, 30, 100);
 
   if(c>0) colorWipe(strip.Color(val,30,100), 1);
-  if(c<0) colorWipe(strip.Color(0, 0, 0), 1); // Black
+  if(c==0) colorWipe(strip.Color(0, 0, 0), 1); // Black
 
 //  switch (val) {
 //  case 1:
