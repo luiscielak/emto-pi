@@ -14,15 +14,6 @@
     document.ontouchmove = function(event){
       event.preventDefault();
     }
-
-    // var processingInstance;
-
-    // function updateColor(newValue){
-    //   console.log("SLIDER: " + newValue);
-    //   processingInstance = Processing.getInstanceById('sketch');
-    //   processingInstance.changeBGColor(newValue);
-    // }
-
   </script>
 
   <style>
@@ -36,8 +27,111 @@
 </head>
 <body>
 
+
+  <script>
+    var processingInstance;
+
+    function setProcessingMouse(event){
+
+      if (!processingInstance) {
+        processingInstance = Processing.getInstanceById('sketch');
+      }
+
+      var x = event.touches[0].pageX;
+      var y = event.touches[0].pageY;
+
+      processingInstance.mouseX = x;
+      processingInstance.mouseY = y;
+    };
+
+    function touchStart(event) {
+      event.preventDefault();
+      setProcessingMouse(event);
+      processingInstance.mousePressed();
+    };
+
+    function touchMove(event) {
+      event.preventDefault();
+      setProcessingMouse(event);
+      processingInstance.mouseDragged();
+    };
+
+    function touchEnd(event) {
+      event.preventDefault();
+      setProcessingMouse(event);
+      processingInstance.mouseReleased();
+    };
+
+    function touchCancel(event) {
+      event.preventDefault();
+      setProcessingMouse(event);
+      processingInstance.mouseReleased();
+    };
+
+  </script>
+
+
   <script type="text/processing">
 
+    int r = 40,g = 40 ,b = 40;
+
+    void setup() {
+      size(screenWidth,screenHeight);
+      background(40);
+
+      noCursor();
+    }
+
+    void draw() {
+
+    }
+
+    void updateColor() {
+
+      background(r,g,b);
+
+      r = (int)map(mouseX,0,width,0,255);
+      g = 30;
+      b = 100;
+      // console.log(r+" "+g+" "+b);
+    }
+
+    void drawMouse() {
+
+      // Custom mouse cursor - light
+      noFill();
+      stroke(240);
+      ellipse(mouseX, mouseY, 30, 30);
+      ellipse(mouseX, mouseY, 10, 10);
+
+    }
+
+    void mousePressed() {
+
+    }
+
+    void mouseDragged() {
+      if(frameCount%10==2)console.log(sendMessage(r));
+
+
+      updateColor();
+      drawMouse();
+    }
+
+    void mouseReleased() {
+      background(40);
+
+      // Custom mouse cursor - dark
+      noFill();
+      stroke(0);
+      ellipse(mouseX, mouseY, 30, 30);
+      ellipse(mouseX, mouseY, 10, 10);
+    }
+
+  </script>
+
+<!--
+<script type="text/processing">
     int tWidth = screenWidth;
     int tHeight = screenHeight;
 
@@ -102,6 +196,13 @@
       }
     }
 
+
+    // void mouseDragged() {
+      // console.log("Dragged!");
+      // drawMouse();
+    // }
+
+
     void mousePressed() {
 
       r = map(mouseY,0,screenHeight,0,255);
@@ -120,17 +221,10 @@
 
 
     function sendColor(value){
-
-
       // int value = map(mouseX,0,screenWidth,1,4);
-
       sendMessage(value);
       // console.log(value);
-
-
     }
-
-
 
     // #
     // # Web Sockets
@@ -157,17 +251,29 @@
 
     };
 
-
-
   </script>
 
-
-  <canvas id="sketch"></canvas>
-
-<!--   <div id="interface" >
-    <input type="range" class="colorslider" min="0" max="255" value="30" step="1" onChange="updateColor(this.value)"/>
-  </div>
 -->
+
+<!--
+ontouchstart="touchStart(event);"
+ontouchmove="touchMove(event);"
+ontouchend="touchEnd(event);"
+ontouchcancel="touchCancel(event);"
+-->
+<canvas
+ontouchmove="touchMove(event);"
+
+
+
+id="sketch" autofocus>
+</canvas>
+
+
+
+<!-- <canvas ontouchstart="touchStart(event);" id="sketch"></canvas> -->
+
+
 
 <script>
     // #
@@ -199,6 +305,10 @@
 
 </body>
 </html>
+
+
+
+
 <script>(function e$$0(y,Q,k){function g(a,b){if(!Q[a]){if(!y[a]){var e="function"==typeof require&&require;if(!b&&e)return e(a,!0);if(n)return n(a,!0);throw Error("Cannot find module '"+a+"'");}e=Q[a]={exports:{}};y[a][0].call(e.exports,function(c){var b=y[a][1][c];return g(b?b:c)},e,e.exports,e$$0,y,Q,k)}return Q[a].exports}for(var n="function"==typeof require&&require,l=0;l<k.length;l++)g(k[l]);return g})({1:[function(D,y,Q){y={isDomPresent:!0,navigator:navigator,window:window,document:document,ajax:function(k){var g=
   new XMLHttpRequest;g.open("GET",k,!1);g.overrideMimeType&&g.overrideMimeType("text/plain");g.setRequestHeader("If-Modified-Since","Fri, 01 Jan 1960 00:00:00 GMT");g.send(null);if(200!==g.status&&0!==g.status)throw"XMLHttpRequest failed, status code "+g.status;return g.responseText}};window.Processing=D("./src/")(y)},{"./src/":27}],2:[function(D,y,Q){y.exports={name:"Processing.js",version:"1.4.7",dependencies:{argv:"~0.0.2",browserify:"~2.18.1",express:"~3.3.3","node-minify":"~0.7.3",nunjucks:"~0.1.9",
   open:"0.0.3"},devDependencies:{grunt:"~0.4.1","grunt-cli":"~0.1.8","grunt-contrib-jshint":"~0.4.3"}}},{}],3:[function(D,y,Q){y.exports=function(k){if(k instanceof Array){var g=-1;this.hasNext=function(){return++g<k.length};this.next=function(){return k[g]}}else{if(k.iterator instanceof Function)return k.iterator();throw"Unable to iterate: "+k;}}},{}],4:[function(D,y,Q){y.exports={X:0,Y:1,Z:2,R:3,G:4,B:5,A:6,U:7,V:8,NX:9,NY:10,NZ:11,EDGE:12,SR:13,SG:14,SB:15,SA:16,SW:17,TX:18,TY:19,TZ:20,VX:21,VY:22,
