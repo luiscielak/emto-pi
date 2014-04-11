@@ -61,6 +61,8 @@ void handleSerial() {
 void setColor() {
   colorWipe(strip.Color(255,255,255), 20); // White
   colorWipe(strip.Color(0, 0, 0), 30); // Black
+  
+
 
 }
 
@@ -69,9 +71,11 @@ void setColor(char* c) {
 
 
   int val = atoi(c);
+  
+//    strip.Color(val, 30, 100);
 
-  colorWipe(strip.Color(val,0,0), 10);
-  colorWipe(strip.Color(0, 0, 0), 1); // Black
+  colorWipe(strip.Color(val,0,0), 1);
+//  colorWipe(strip.Color(0, 0, 0), 1); // Black
 
 //  switch (val) {
 //  case 1:
