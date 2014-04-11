@@ -11,15 +11,23 @@
 
   <script type="text/javascript">
 
-    var processingInstance;
+    // var processingInstance;
 
-    function updateColor(newValue){
-      console.log("SLIDER: " + newValue);
-      processingInstance = Processing.getInstanceById('sketch');
-      processingInstance.changeBGColor(newValue);
-    }
+    // function updateColor(newValue){
+    //   console.log("SLIDER: " + newValue);
+    //   processingInstance = Processing.getInstanceById('sketch');
+    //   processingInstance.changeBGColor(newValue);
+    // }
 
   </script>
+
+  <style>
+    #sketch {
+      margin-top: -8px;
+      margin-left: -8px;
+      margin-bottom: -12px;
+    }
+  </style>
 
 </head>
 <body>
@@ -150,14 +158,14 @@
   </script>
 
 
-  <canvas id="sketch" style="margin: 1px solid black;"></canvas>
+  <canvas id="sketch"></canvas>
 
-  <div id="interface" >
+<!--   <div id="interface" >
     <input type="range" class="colorslider" min="0" max="255" value="30" step="1" onChange="updateColor(this.value)"/>
   </div>
+-->
 
-
-  <script>
+<script>
     // #
     // # Web Sockets
     // #
