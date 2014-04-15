@@ -20,6 +20,7 @@ void setup() {
 }
 
 void loop() {
+//  colorWipe(strip.Color(255, 0, 0), 50); // Red
   handleSerial();
 
 }
@@ -38,8 +39,6 @@ void handleSerial() {
     else {
       // reached end of line
       msgArray[msgPos] = 0;
-
-
 
 
       // here the message is processed
@@ -61,7 +60,7 @@ void handleSerial() {
 void setColor() {
   colorWipe(strip.Color(255,255,255), 20); // White
   colorWipe(strip.Color(0, 0, 0), 30); // Black
-  
+
 
 
 }
@@ -71,32 +70,33 @@ void setColor(char* c) {
 
 
   int val = atoi(c);
-  
-//    strip.Color(val, 30, 100);
 
-  if(c>0) colorWipe(strip.Color(val,30,100), 1);
-  if(c==0) colorWipe(strip.Color(0, 0, 0), 1); // Black
+  colorWipe(strip.Color(val,30,100), 20); // White
+  //strip.Color(val, 30, 100);
 
-//  switch (val) {
-//  case 1:
-//    colorWipe(strip.Color(0,0,255), 10); // Blue
-//    colorWipe(strip.Color(0, 0, 0), 1); // Black
-//    break;
-//  case 2:
-//    colorWipe(strip.Color(0,255,0), 10); // Green
-//    colorWipe(strip.Color(0, 0, 0), 1); // Black
-//    break;
-//  case 3:
-//    colorWipe(strip.Color(255,0,0), 10); // Red
-//    colorWipe(strip.Color(0, 0, 0), 1); // Black
-//    break;
-//  case 4:
-//    colorWipe(strip.Color(223, 0, 255), 10); // Purple
-//    colorWipe(strip.Color(0, 0, 0), 1); // Black
-//    break;    
-//  default: 
-//    setColor();
-//  }
+  //  if(c>0) colorWipe(strip.Color(val,30,100), 1);
+  //  if(c==0) colorWipe(strip.Color(0, 0, 0), 1); // Black
+
+  //  switch (val) {
+  //  case 1:
+  //    colorWipe(strip.Color(0,0,255), 10); // Blue
+  //    colorWipe(strip.Color(0, 0, 0), 1); // Black
+  //    break;
+  //  case 2:
+  //    colorWipe(strip.Color(0,255,0), 10); // Green
+  //    colorWipe(strip.Color(0, 0, 0), 1); // Black
+  //    break;
+  //  case 3:
+  //    colorWipe(strip.Color(255,0,0), 10); // Red
+  //    colorWipe(strip.Color(0, 0, 0), 1); // Black
+  //    break;
+  //  case 4:
+  //    colorWipe(strip.Color(223, 0, 255), 10); // Purple
+  //    colorWipe(strip.Color(0, 0, 0), 1); // Black
+  //    break;    
+  //  default: 
+  //    setColor();
+  //  }
 
 
 
@@ -111,6 +111,8 @@ void colorWipe(uint32_t c, uint8_t wait) {
     delay(wait);
   }
 }
+
+
 
 
 
