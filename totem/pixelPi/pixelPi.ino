@@ -67,9 +67,9 @@ void setColor() {
 void setColor(char* c) {
 
 
-  int val = atoi(c);
+  int r = atoi(c);
 
-  colorWipe(strip.Color(val,30,100), 1);
+  colorWipe(strip.Color(r,30,100), 1);
   //strip.Color(val, 30, 100);
 
   //  if(c>0) colorWipe(strip.Color(val,30,100), 1);
