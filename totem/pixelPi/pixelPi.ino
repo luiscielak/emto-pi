@@ -1,8 +1,8 @@
 #include <Adafruit_NeoPixel.h>
 
-#define PIN 6
+#define PIN 6  // neopixel ring LED
 
-#define LED_PIN 13
+#define LED_PIN 13 // status LED
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
 
@@ -61,8 +61,6 @@ void setColor() {
   colorWipe(strip.Color(255,255,255), 20); // White
   colorWipe(strip.Color(0, 0, 0), 30); // Black
 
-
-
 }
 
 
@@ -71,7 +69,7 @@ void setColor(char* c) {
 
   int val = atoi(c);
 
-  colorWipe(strip.Color(val,30,100), 20); // White
+  colorWipe(strip.Color(val,30,100), 1);
   //strip.Color(val, 30, 100);
 
   //  if(c>0) colorWipe(strip.Color(val,30,100), 1);

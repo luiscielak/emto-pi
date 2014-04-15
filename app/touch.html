@@ -83,6 +83,9 @@
     }
 
     void draw() {
+      background(r,g,b);
+
+      drawMouse();
 
     }
 
@@ -91,8 +94,10 @@
       background(r,g,b);
 
       r = (int)map(mouseX,1,width,1,255);
-      g = 30;
+      // g = 30;
+      g = (int)map(mouseY,1,height,1,255);
       b = 100;
+      // b = (int)map(mouseY,1,height,1,255);
       // console.log(r+" "+g+" "+b);
     }
 
@@ -131,130 +136,6 @@
 
   </script>
 
-<!--
-<script type="text/processing">
-    int tWidth = screenWidth;
-    int tHeight = screenHeight;
-
-    int r,g,b;
-
-    color currentColor;
-    color bgColor = 0;
-
-    void setup() {
-      size(tWidth, tHeight);
-      colorMode(RGB);
-      background(0);
-      noCursor();
-
-      currentColor = 2;
-      bgColor = 30;
-
-      stroke(240);
-      noFill();
-    }
-
-    void draw() {
-      background(40);
-
-      // fill(100,bgColor,100,100);
-      // rect(0, 0, tWidth,tHeight);
-
-      drawMouse();
-
-    }
-
-    void drawMouse() {
-
-      // Custom mouse cursor - dark
-      noFill();
-      stroke(currentColor,180);
-      ellipse(mouseX, mouseY, 30, 30);
-      ellipse(mouseX, mouseY, 10, 10);
-
-      if (mousePressed) {
-
-        // if (mouseX>width/2 && mouseY>height/2) background(235, 128, 32);
-        // if (mouseX<width/2 && mouseY>height/2) background(235, 32, 128);
-        // if (mouseX<width/2 && mouseY<height/2) background(32, 235, 128);
-        // if (mouseX>width/2 && mouseY<height/2) background(32, 128, 235);
-
-        g = map(mouseX,0,screenWidth,0,255);
-        r = map(mouseY,0,screenHeight,0,255);
-        background(r,g,100);
-
-        // sendColor(r,g,100);
-        // sendColor(r);
-
-        // Custom mouse cursor - light
-        noFill();
-        stroke(240);
-        ellipse(mouseX, mouseY, 30, 30);
-        ellipse(mouseX, mouseY, 10, 10);
-      }
-      else {
-        currentColor = 2;
-      }
-    }
-
-
-    // void mouseDragged() {
-      // console.log("Dragged!");
-      // drawMouse();
-    // }
-
-
-    void mousePressed() {
-
-      r = map(mouseY,0,screenHeight,0,255);
-      sendColor(r);
-
-      // drawLog(mouseX,mouseY);
-
-      // sendColor(random(1,4));
-    }
-
-
-    void changeBGColor(int tValue){
-      bgColor = tValue;
-      // console.log(bgColor);
-    }
-
-
-    function sendColor(value){
-      // int value = map(mouseX,0,screenWidth,1,4);
-      sendMessage(value);
-      // console.log(value);
-    }
-
-    // #
-    // # Web Sockets
-    // #
-
-    // Initialize Web Sockets
-    var socket = new WebSocket("ws://coder.local:9999/ws");
-
-    socket.onopen = function(){
-      console.log("connected");
-    };
-
-    socket.onmessage = function (message) {
-      console.log("receiving: " + message.data);
-    };
-
-    socket.onclose = function(){
-      console.log("disconnected");
-    };
-
-    sendMessage = function(message) {
-      console.log("sending: " + message);
-      socket.send(message);
-
-    };
-
-  </script>
-
--->
 
 <!--
 ontouchstart="touchStart(event);"
