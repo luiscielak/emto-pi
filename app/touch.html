@@ -78,20 +78,15 @@
     void setup() {
       size(screenWidth,screenHeight);
       background(40);
-
       noCursor();
     }
 
     void draw() {
       background(r,g,b);
-
       drawMouse();
-
     }
 
     void updateColor() {
-
-      background(r,g,b);
 
       r = (int)map(mouseX,1,width,1,255);
       // g = 30;
@@ -101,6 +96,10 @@
       // console.log(r+" "+g+" "+b);
     }
 
+    void renderColor() {
+      background(r,g,b);
+    }
+
     void drawMouse() {
 
       // Custom mouse cursor - light
@@ -108,7 +107,6 @@
       stroke(240);
       ellipse(mouseX, mouseY, 30, 30);
       ellipse(mouseX, mouseY, 10, 10);
-
     }
 
     void mousePressed() {
@@ -117,7 +115,6 @@
 
     void mouseDragged() {
       if(frameCount%10==2)sendMessage(r);
-
 
       updateColor();
       drawMouse();
